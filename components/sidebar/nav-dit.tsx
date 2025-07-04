@@ -6,7 +6,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/sidebar/ui/collapsible"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -17,9 +17,9 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
+} from "@/components/sidebar/ui/sidebar"
 
-export function NavDAF({
+export function NavDIT({
   items,
 }: {
   items: {
@@ -35,7 +35,7 @@ export function NavDAF({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Administrativo-Financeiro</SidebarGroupLabel>
+      <SidebarGroupLabel>Técnica</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>

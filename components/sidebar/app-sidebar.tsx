@@ -2,25 +2,18 @@
 
 import * as React from "react";
 import {
-  BookOpen,
-  Bot,
   Command,
-  Frame,
   House,
   LifeBuoy,
-  Map,
-  PieChart,
   Send,
-  Settings2,
-  SquareTerminal,
 } from "lucide-react";
 
-import { NavPresidencia } from "@/components/nav-presidencia";
-import { NavDAF } from "@/components/nav-daf";
-import { NavDIT } from "@/components/nav-dit";
-import { NavProjects } from "@/components/nav-general";
-import { NavSecondary } from "@/components/nav-secondary";
-import { NavUser } from "@/components/nav-user";
+import { NavPresidencia } from "@/components/sidebar/nav-presidencia";
+import { NavDAF } from "@/components/sidebar/nav-daf";
+import { NavDIT } from "@/components/sidebar/nav-dit";
+import { NavProjects } from "@/components/sidebar/nav-general";
+import { NavSecondary } from "@/components/sidebar/nav-secondary";
+import { NavUser } from "@/components/sidebar/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -29,14 +22,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/components/sidebar/ui/sidebar";
 import { NavDDA } from "./nav-dda";
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Otthon Leão",
+    email: "otthon.leao@aadesam.org.br",
+    avatar: "https://github.com/otthonleao.png",
   },
     projects: [
     {
@@ -165,6 +158,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
+    
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
         <SidebarMenu>
@@ -184,13 +178,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-		<NavProjects projects={data.projects} />
-        <NavPresidencia items={data.navPresidencia} />
-		<NavDAF items={data.navDAF} />
-        <NavDIT items={data.navDIT} />
-		<NavDDA items={data.navDDA} />
-        
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+		    <NavProjects projects={data.projects} />
+          <NavPresidencia items={data.navPresidencia} />
+		      <NavDAF items={data.navDAF} />
+          <NavDIT items={data.navDIT} />
+		      <NavDDA items={data.navDDA} />
+          <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

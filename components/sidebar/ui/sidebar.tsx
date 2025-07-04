@@ -7,23 +7,23 @@ import { PanelLeftIcon } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/sidebar/ui/button"
+import { Input } from "@/components/sidebar/ui/input"
+import { Separator } from "@/components/sidebar/ui/separator"
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet"
-import { Skeleton } from "@/components/ui/skeleton"
+} from "@/components/sidebar/ui/sheet"
+import { Skeleton } from "@/components/sidebar/ui/skeleton"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from "@/components/sidebar/ui/tooltip"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -170,7 +170,7 @@ function Sidebar({
       <div
         data-slot="sidebar"
         className={cn(
-          "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col",
+          "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col slate-950",
           className
         )}
         {...props}
@@ -193,7 +193,7 @@ function Sidebar({
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
             } as React.CSSProperties
           }
-          side={side}
+          side={"right"}
         >
           <SheetHeader className="sr-only">
             <SheetTitle>Sidebar</SheetTitle>
