@@ -22,7 +22,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/sidebar/ui/sidebar";
+} from "@/components/ui/sidebar";
 import { NavDDA } from "./nav-dda";
 
 const data = {

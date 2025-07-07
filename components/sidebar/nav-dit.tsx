@@ -1,12 +1,11 @@
 "use client"
-
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/sidebar/ui/collapsible"
+} from "@/components/ui/collapsible"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -17,7 +16,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/sidebar/ui/sidebar"
+} from "@/components/ui/sidebar"
 
 export function NavDIT({
   items,
