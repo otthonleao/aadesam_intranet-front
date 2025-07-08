@@ -50,9 +50,13 @@ const frameworks = [
   },
 ]
 
-export function TCE_ModalidadeLicitacao() {
+interface TCE_ModalidadeLicitacaoProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export function TCE_ModalidadeLicitacao({ value, onChange }: TCE_ModalidadeLicitacaoProps) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -79,7 +83,7 @@ export function TCE_ModalidadeLicitacao() {
                                 key={framework.value}
                                 value={framework.value}
                                 onSelect={(currentValue) => {
-                                    setValue(currentValue === value ? "" : currentValue)
+                                    onChange(currentValue === value ? "" : currentValue)
                                     setOpen(false)
                                 }}
                                 >
@@ -89,8 +93,7 @@ export function TCE_ModalidadeLicitacao() {
                                     value === framework.value ? "opacity-100" : "opacity-0"
                                     )}
                                 />
-                                {/* {framework.label} */}
-                  {framework.label}
+                                {framework.label}
                 </CommandItem>
               ))}
             </CommandGroup>

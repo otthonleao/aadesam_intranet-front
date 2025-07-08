@@ -1,4 +1,7 @@
+"use client";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button"
 import {
@@ -16,6 +19,56 @@ import { Licitacao_NaturezaDoObjeto, Licitacao_NaturezaDoProcedimento, Licitacao
 import { Licitacao_TextArea } from "@/components/forms/form-textarea";
 
 export function TCEeContas_Licitacao() {
+  const [modalidadeLicitacao, setModalidadeLicitacao] = useState("");
+  const [tipoLicitacao, setTipoLicitacao] = useState("");
+  const [naturezaObjeto, setNaturezaObjeto] = useState("");
+  const [naturezaProcedimento, setNaturezaProcedimento] = useState("");
+  const [regimeObra, setRegimeObra] = useState("");
+  const [tipoItemLote, setTipoItemLote] = useState("L");
+  const [objetoLicitacao, setObjetoLicitacao] = useState("");
+
+  const handleGerarJson = () => {
+    const codUnidadeOrcamentaria = (document.getElementById('cod-unidade-orcamentaria') as HTMLInputElement)?.value;
+    const numProcessoLicitatorio = (document.getElementById('num-processo-licitatorio') as HTMLInputElement)?.value;
+    const vlTotalPrevisto = (document.getElementById('vl-total-previsto') as HTMLInputElement)?.value;
+    const competencia = (document.getElementById('competencia') as HTMLInputElement)?.value;
+    const idContratacaoPNCP = (document.getElementById('id-contratacao-pncp') as HTMLInputElement)?.value;
+
+    const jsonData = [
+      {
+        codUnidadeOrcamentaria: parseInt(codUnidadeOrcamentaria),
+        numProcessoLicitatorio,
+        codModalidadeLicitacao: parseInt(modalidadeLicitacao),
+        codTipoLicitacao: parseInt(tipoLicitacao),
+        codNaturezaObjeto: parseInt(naturezaObjeto),
+        codNaturezaProcedimento: parseInt(naturezaProcedimento),
+        desObjetoLicitacao: objetoLicitacao,
+        codRegimeObra: regimeObra ? parseInt(regimeObra) : null,
+        vlTotalPrevisto: parseFloat(vlTotalPrevisto),
+        tpItemLote: tipoItemLote,
+        competencia: parseInt(competencia),
+        idContratacaoPNCP
+      }
+    ];
+
+    // Criar o arquivo JSON
+    const jsonString = JSON.stringify(jsonData, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    // Criar link para download
+    const a = document.createElement('a');
+    a.href = url;
+    const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, 12);
+    a.download = `licitacao_${timestamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    
+    // Limpar
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="flex w-full max-w-sm flex-col gap-6">
       <Tabs defaultValue="account">
@@ -42,30 +95,30 @@ export function TCEeContas_Licitacao() {
                 <Input id="num-processo-licitatorio" placeholder="2024006806/AADESAM" />
               </div>
               <div className="grid gap-3">
-                <Label>Modalidade de Licitação</Label>
-                <TCE_ModalidadeLicitacao></TCE_ModalidadeLicitacao>
+                <Label htmlFor="cod-modalidade-licitacao">Modalidade de Licitação</Label>
+                <TCE_ModalidadeLicitacao value={modalidadeLicitacao} onChange={setModalidadeLicitacao} />
               </div>
               <div className="grid gap-3">
-                <Label>Tipo de Licitação</Label>
-                <TCE_TipoLicitacao></TCE_TipoLicitacao>
+                <Label htmlFor="cod-tipo-licitacao">Tipo de Licitação</Label>
+                <TCE_TipoLicitacao value={tipoLicitacao} onChange={setTipoLicitacao} />
               </div>
               <div className="grid gap-3">
-                <Label>Natureza do Objeto</Label>
+                <Label htmlFor="cod-natureza-objeto">Natureza do Objeto</Label>
                 <p className="text-muted-foreground text-sm">
                   Obrigatório somente quando a Natureza do Objeto for 01 - Obras e Serviços de Engenharia
                 </p>
-                <Licitacao_NaturezaDoObjeto></Licitacao_NaturezaDoObjeto>
+                <Licitacao_NaturezaDoObjeto value={naturezaObjeto} onChange={setNaturezaObjeto} />
               </div>
               <div className="grid gap-3">
-                <Label>Natureza do Procedimento</Label>
-                <Licitacao_NaturezaDoProcedimento></Licitacao_NaturezaDoProcedimento>
+                <Label htmlFor="cod-natureza-procedimento">Natureza do Procedimento</Label>
+                <Licitacao_NaturezaDoProcedimento value={naturezaProcedimento} onChange={setNaturezaProcedimento} />
               </div>
               <div className="grid gap-3">
-                <Licitacao_TextArea></Licitacao_TextArea>
+                <Licitacao_TextArea value={objetoLicitacao} onChange={setObjetoLicitacao} />
               </div>
               <div className="grid gap-3">
                 <Label>Regime de Execução - Obras</Label>
-                <Licitacao_RegimeDeExecucaoObra></Licitacao_RegimeDeExecucaoObra>
+                <Licitacao_RegimeDeExecucaoObra value={regimeObra} onChange={setRegimeObra} />
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="vl-total-previsto">Valor Total Previsto para Despesa</Label>
@@ -73,7 +126,7 @@ export function TCEeContas_Licitacao() {
               </div>
               <div className="grid gap-3">
                 <Label>Tipo da Licitação</Label>
-                <Licitacao_TipoLicitacao></Licitacao_TipoLicitacao>
+                <Licitacao_TipoLicitacao value={tipoItemLote} onChange={setTipoItemLote} />
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="competencia">Competência</Label>
@@ -85,7 +138,7 @@ export function TCEeContas_Licitacao() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button>Gerar JSON</Button>
+              <Button id="btn-gerar-json" onClick={handleGerarJson}>Gerar JSON</Button>
             </CardFooter>
           </Card>
         </TabsContent>

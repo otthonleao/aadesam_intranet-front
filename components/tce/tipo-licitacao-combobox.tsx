@@ -19,28 +19,32 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-const frameworks = [
-  {
-    value: "1",
-    label: "1 - Menor Preço",
-  },
-  {
-    value: "2",
-    label: "2 - Melhor Técnica",
-  },
-  {
-    value: "3",
-    label: "3 - Técnica e Preço",
-  },
-  {
-    value: "4",
-    label: "4 - Maior Lance ou Oferta",
-  },
-]
+interface ComboboxProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
-export function TCE_TipoLicitacao() {
+export function TCE_TipoLicitacao({ value, onChange }: ComboboxProps) {
+  const codTipoLicitacao = [
+    {
+      value: "1",
+      label: "1 - Menor Preço",
+    },
+    {
+      value: "2",
+      label: "2 - Melhor Técnica",
+    },
+    {
+      value: "3",
+      label: "3 - Técnica e Preço",
+    },
+    {
+      value: "4",
+      label: "4 - Maior Lance ou Oferta",
+    },
+  ]
+
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -52,7 +56,7 @@ export function TCE_TipoLicitacao() {
             className="w-[335px] justify-between"
             >
             {value
-                ? frameworks.find((framework) => framework.value === value)?.label
+                ? codTipoLicitacao.find((framework) => framework.value === value)?.label
                 : "Escolha o código do tipo de licitação"}
                 <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
@@ -62,23 +66,22 @@ export function TCE_TipoLicitacao() {
                 <CommandInput placeholder="Tipo de Licitação" />
                     <CommandList>
                         <CommandEmpty>Escolha....</CommandEmpty>
-                        <CommandGroup>{frameworks.map((framework) => (
+                        <CommandGroup>{codTipoLicitacao.map((codTipoLicitacao) => (
                             <CommandItem
-                                key={framework.value}
-                                value={framework.value}
+                                key={codTipoLicitacao.value}
+                                value={codTipoLicitacao.value}
                                 onSelect={(currentValue) => {
-                                    setValue(currentValue === value ? "" : currentValue)
+                                    onChange(currentValue === value ? "" : currentValue)
                                     setOpen(false)
                                 }}
                                 >
                                 <CheckIcon
                                     className={cn(
                                     "mr-2 h-4 w-4",
-                                    value === framework.value ? "opacity-100" : "opacity-0"
+                                    value === codTipoLicitacao.value ? "opacity-100" : "opacity-0"
                                     )}
                                 />
-                                {/* {framework.label} */}
-                  {framework.label}
+                                {codTipoLicitacao.label}
                 </CommandItem>
               ))}
             </CommandGroup>
@@ -89,7 +92,7 @@ export function TCE_TipoLicitacao() {
   )
 }
 
-export function Licitacao_NaturezaDoObjeto() {
+export function Licitacao_NaturezaDoObjeto({ value, onChange }: ComboboxProps) {
   const valoresNaturezaDoObjeto = [
     {
       value: "01",
@@ -118,7 +121,6 @@ export function Licitacao_NaturezaDoObjeto() {
   ]
 
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -130,7 +132,7 @@ export function Licitacao_NaturezaDoObjeto() {
             className="w-[335px] justify-between"
             >
             {value
-                ? valoresNaturezaDoObjeto.find((valoresNaturezaDoObjeto) => valoresNaturezaDoObjeto.value === value)?.label
+                ? valoresNaturezaDoObjeto.find((item) => item.value === value)?.label
                 : "Natureza do Objeto - Obrigatório"}
                 <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
@@ -140,22 +142,22 @@ export function Licitacao_NaturezaDoObjeto() {
                 <CommandInput placeholder="Tipo de Licitação" />
                     <CommandList>
                         <CommandEmpty>Escolha....</CommandEmpty>
-                        <CommandGroup>{valoresNaturezaDoObjeto.map((valoresNaturezaDoObjeto) => (
+                        <CommandGroup>{valoresNaturezaDoObjeto.map((item) => (
                             <CommandItem
-                                key={valoresNaturezaDoObjeto.value}
-                                value={valoresNaturezaDoObjeto.value}
+                                key={item.value}
+                                value={item.value}
                                 onSelect={(currentValue) => {
-                                    setValue(currentValue === value ? "" : currentValue)
+                                    onChange(currentValue === value ? "" : currentValue)
                                     setOpen(false)
                                 }}
                                 >
                                 <CheckIcon
                                     className={cn(
                                     "mr-2 h-4 w-4",
-                                    value === valoresNaturezaDoObjeto.value ? "opacity-100" : "opacity-0"
+                                    value === item.value ? "opacity-100" : "opacity-0"
                                     )}
                                 />
-                  {valoresNaturezaDoObjeto.label}
+                                {item.label}
                 </CommandItem>
               ))}
             </CommandGroup>
@@ -166,7 +168,7 @@ export function Licitacao_NaturezaDoObjeto() {
   )
 }
 
-export function Licitacao_NaturezaDoProcedimento() {
+export function Licitacao_NaturezaDoProcedimento({ value, onChange }: ComboboxProps) {
   const codNaturezaDoProcedimento = [
     {
       value: "01",
@@ -183,7 +185,6 @@ export function Licitacao_NaturezaDoProcedimento() {
   ]
 
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -195,7 +196,7 @@ export function Licitacao_NaturezaDoProcedimento() {
             className="w-[335px] justify-between"
             >
             {value
-                ? codNaturezaDoProcedimento.find((valoresNaturezaDoProcedimento) => valoresNaturezaDoProcedimento.value === value)?.label
+                ? codNaturezaDoProcedimento.find((item) => item.value === value)?.label
                 : "Código de Regime de Obra"}
                 <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
@@ -205,22 +206,22 @@ export function Licitacao_NaturezaDoProcedimento() {
                 <CommandInput />
                     <CommandList>
                         <CommandEmpty>Escolha....</CommandEmpty>
-                        <CommandGroup>{codNaturezaDoProcedimento.map((valoresNaturezaDoProcedimento) => (
+                        <CommandGroup>{codNaturezaDoProcedimento.map((item) => (
                             <CommandItem
-                                key={valoresNaturezaDoProcedimento.value}
-                                value={valoresNaturezaDoProcedimento.value}
+                                key={item.value}
+                                value={item.value}
                                 onSelect={(currentValue) => {
-                                    setValue(currentValue === value ? "" : currentValue)
+                                    onChange(currentValue === value ? "" : currentValue)
                                     setOpen(false)
                                 }}
                                 >
                                 <CheckIcon
                                     className={cn(
                                     "mr-2 h-4 w-4",
-                                    value === valoresNaturezaDoProcedimento.value ? "opacity-100" : "opacity-0"
+                                    value === item.value ? "opacity-100" : "opacity-0"
                                     )}
                                 />
-                  {valoresNaturezaDoProcedimento.label}
+                                {item.label}
                 </CommandItem>
               ))}
             </CommandGroup>
@@ -231,7 +232,7 @@ export function Licitacao_NaturezaDoProcedimento() {
   )
 }
 
-export function Licitacao_RegimeDeExecucaoObra() {
+export function Licitacao_RegimeDeExecucaoObra({ value, onChange }: ComboboxProps) {
   const codRegimeObra = [
     {
       value: "1",
@@ -256,7 +257,6 @@ export function Licitacao_RegimeDeExecucaoObra() {
   ]
 
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -268,7 +268,7 @@ export function Licitacao_RegimeDeExecucaoObra() {
             className="w-[335px] justify-between"
             >
             {value
-                ? codRegimeObra.find((valoresRegimeObra) => valoresRegimeObra.value === value)?.label
+                ? codRegimeObra.find((item) => item.value === value)?.label
                 : "Regime de Execução - Obras"}
                 <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
@@ -278,22 +278,22 @@ export function Licitacao_RegimeDeExecucaoObra() {
                 <CommandInput />
                     <CommandList>
                         <CommandEmpty>Escolha....</CommandEmpty>
-                        <CommandGroup>{codRegimeObra.map((valoresRegimeObra) => (
+                        <CommandGroup>{codRegimeObra.map((item) => (
                             <CommandItem
-                                key={valoresRegimeObra.value}
-                                value={valoresRegimeObra.value}
+                                key={item.value}
+                                value={item.value}
                                 onSelect={(currentValue) => {
-                                    setValue(currentValue === value ? "" : currentValue)
+                                    onChange(currentValue === value ? "" : currentValue)
                                     setOpen(false)
                                 }}
                                 >
                                 <CheckIcon
                                     className={cn(
                                     "mr-2 h-4 w-4",
-                                    value === valoresRegimeObra.value ? "opacity-100" : "opacity-0"
+                                    value === item.value ? "opacity-100" : "opacity-0"
                                     )}
                                 />
-                  {valoresRegimeObra.label}
+                                {item.label}
                 </CommandItem>
               ))}
             </CommandGroup>
@@ -304,7 +304,7 @@ export function Licitacao_RegimeDeExecucaoObra() {
   )
 }
 
-export function Licitacao_TipoLicitacao() {
+export function Licitacao_TipoLicitacao({ value, onChange }: ComboboxProps) {
   const tpItemLote = [
     {
       value: "I",
@@ -317,7 +317,6 @@ export function Licitacao_TipoLicitacao() {
   ]
 
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -329,7 +328,7 @@ export function Licitacao_TipoLicitacao() {
             className="w-[335px] justify-between"
             >
             {value
-                ? tpItemLote.find((valorItemLicitacao) => valorItemLicitacao.value === value)?.label
+                ? tpItemLote.find((item) => item.value === value)?.label
                 : "Item ou Lote"}
                 <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
@@ -339,22 +338,22 @@ export function Licitacao_TipoLicitacao() {
                 <CommandInput />
                     <CommandList>
                         <CommandEmpty>Escolha....</CommandEmpty>
-                        <CommandGroup>{tpItemLote.map((valorItemLicitacao) => (
+                        <CommandGroup>{tpItemLote.map((item) => (
                             <CommandItem
-                                key={valorItemLicitacao.value}
-                                value={valorItemLicitacao.value}
+                                key={item.value}
+                                value={item.value}
                                 onSelect={(currentValue) => {
-                                    setValue(currentValue === value ? "" : currentValue)
+                                    onChange(currentValue === value ? "" : currentValue)
                                     setOpen(false)
                                 }}
                                 >
                                 <CheckIcon
                                     className={cn(
                                     "mr-2 h-4 w-4",
-                                    value === valorItemLicitacao.value ? "opacity-100" : "opacity-0"
+                                    value === item.value ? "opacity-100" : "opacity-0"
                                     )}
                                 />
-                  {valorItemLicitacao.label}
+                                {item.label}
                 </CommandItem>
               ))}
             </CommandGroup>
