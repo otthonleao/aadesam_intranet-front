@@ -53,7 +53,7 @@ export function TCE_TipoLicitacao({ value, onChange }: ComboboxProps) {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[335px] justify-between"
+            className="w-[full] justify-between"
             >
             {value
                 ? codTipoLicitacao.find((framework) => framework.value === value)?.label
@@ -129,7 +129,7 @@ export function Licitacao_NaturezaDoObjeto({ value, onChange }: ComboboxProps) {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[335px] justify-between"
+            className="w-[full] justify-between"
             >
             {value
                 ? valoresNaturezaDoObjeto.find((item) => item.value === value)?.label
@@ -193,7 +193,7 @@ export function Licitacao_NaturezaDoProcedimento({ value, onChange }: ComboboxPr
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[335px] justify-between"
+            className="w-[full] justify-between"
             >
             {value
                 ? codNaturezaDoProcedimento.find((item) => item.value === value)?.label
@@ -265,7 +265,7 @@ export function Licitacao_RegimeDeExecucaoObra({ value, onChange }: ComboboxProp
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[335px] justify-between"
+            className="w-[full] justify-between"
             >
             {value
                 ? codRegimeObra.find((item) => item.value === value)?.label
@@ -325,7 +325,7 @@ export function Licitacao_TipoLicitacao({ value, onChange }: ComboboxProps) {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[335px] justify-between"
+            className="w-[full] justify-between"
             >
             {value
                 ? tpItemLote.find((item) => item.value === value)?.label

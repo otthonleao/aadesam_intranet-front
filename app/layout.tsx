@@ -71,6 +71,7 @@ export default function RootLayout({
                   <TCEeContas_Licitacao></TCEeContas_Licitacao>
                 </div>
                 <div className="bg-muted/50 aspect-video rounded-xl" />
+                  {/* <TCEeContas_LicitacaoItem></TCEeContas_LicitacaoItem> */}
                 {/* <div className="bg-muted/50 aspect-video rounded-xl" /> */}
               </div>
               <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
