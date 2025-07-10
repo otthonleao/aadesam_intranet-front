@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import {
-  Command,
   House,
   LifeBuoy,
   Send,
@@ -57,20 +57,19 @@ const data = {
     {
       title: "Comunicação Social - COS",
       url: "#",
-    //   icon: Bot,
     },
     {
       title: "Contralodoria - CIC",
       url: "#",
-	},
-	{
+	  },
+	  {
       title: "Consultoria Técnica - COT",
       url: "#",
-	},
-	{
+	  },
+	  {
       title: "Consultoria Jurídica - COJ",
       url: "#",
-	},
+	  },
     {
       title: "Comissão Licitação - COL",
       url: "#",
@@ -81,66 +80,60 @@ const data = {
         }
       ],
     },
-	{
+	  {
       title: "Ouvidoria - OUV",
       url: "#",
-	},
+	  },
   ],
   navDAF: [
     {
       title: "Diretoria - DAF",
       url: "#",
-    //   icon: SquareTerminal,
-    //   isActive: false,
     },
-	{
+	  {
       title: "Orçamentos e Finanças - GOF",
       url: "#",
-	},
-	{
+	  },
+	  {
       title: "Recursos Humanos - GRH",
       url: "#",
-	},
-	{
+	  },
+	  {
       title: "Apoio Logístico - GAL",
       url: "#",
-	},
-	{
+	  },
+	  {
       title: "Tecnologia Informação - GTI",
       url: "#",
-	},
+	  },
   ],
   navDIT: [
     {
       title: "Diretoria - DIT",
       url: "#",
-    //   icon: SquareTerminal,
-    //   isActive: false,
     },
-	{
+	  {
       title: "Elaboração de Projetos - GEP",
       url: "#",
-	},
-	{
+	  },
+	  {
       title: "Prestação de Contas - GPC",
       url: "#",
-	},
-	{
+	  },
+	  {
       title: "Monitoramento e Controle - GMP",
       url: "#",
-	},
+	  },
   ],
   navDDA: [
     {
       title: "Diretoria - DDA",
       url: "#",
-    //   icon: SquareTerminal,
-    //   isActive: false,
     },
-	{
+	  {
       title: "Pesquisa e Estudos - GET",
       url: "#",
-	},
+	  },
   ],
   navSecondary: [
     {
@@ -163,14 +156,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
+            <SidebarMenuButton size="lg" asChild className="h-22">
               <a href="#">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Command className="size-4" />
-                </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate text-2xl font-extrabold">AADESAM</span>
-                  <span className="truncate text-xs">Agência Amazonense de Desenvolvimento Econômico, Social e Ambiental</span>
+                  <Image src="/image/brand/aadesam-brand-white.png" alt="Logo AADESAM" className="h-22 object-contain" fill priority/>
                 </div>
               </a>
             </SidebarMenuButton>
