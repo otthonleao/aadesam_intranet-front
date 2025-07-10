@@ -17,15 +17,6 @@ export function Licitacao_TextArea({ value, onChange }: TextAreaProps) {
         onChange={(e) => onChange(e.target.value)}
         maxLength={300}
       />
-      {/* <p className="text-muted-foreground text-sm">
-        Deve conter máximo 300 caracteres
-      </p> */}
     </div>
   )
-}
-
-export function Licitacao_RadioGroup() {
-  // return (
-    
-  // )
 }

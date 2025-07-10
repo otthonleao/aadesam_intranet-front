@@ -6,7 +6,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { Separator } from "@radix-ui/react-separator";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { TCEeContas_Licitacao } from "./presidencia/col/page";
+import { TCE_CardItemLicitacao, TCE_CardLicitacao } from "./presidencia/col/page";
 // import { ThemeProvider } from "@/components/theme-provider";
 // import { ModeToggle } from "@/components/mode-toogle";
 
@@ -66,16 +66,12 @@ export default function RootLayout({
             </header>
             
             <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-              <div className="grid auto-rows-min gap-4 md:grid-cols-2">
-                <div className="bg-muted/100 aspect-video rounded-xl">
-                  <TCEeContas_Licitacao></TCEeContas_Licitacao>
-                </div>
-                <div className="bg-muted/50 aspect-video rounded-xl" />
-                  {/* <TCEeContas_LicitacaoItem></TCEeContas_LicitacaoItem> */}
-                {/* <div className="bg-muted/50 aspect-video rounded-xl" /> */}
+              <div>
+                <TCE_CardLicitacao></TCE_CardLicitacao>
               </div>
-              <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
-              
+              <div>
+                <TCE_CardItemLicitacao></TCE_CardItemLicitacao>
+              </div>
             </div>
           </SidebarInset>
             {/* <main className="flex flex-1 flex-col gap-4 p-4 pt-0 w-full h-screen">

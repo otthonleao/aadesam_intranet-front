@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -15,8 +16,9 @@ import { Label } from "@/components/ui/label"
 import { TCE_ModalidadeLicitacao } from "@/components/tce/modalidade-licitacao-combobox";
 import { Licitacao_NaturezaDoObjeto, Licitacao_NaturezaDoProcedimento, Licitacao_RegimeDeExecucaoObra, Licitacao_TipoLicitacao, TCE_TipoLicitacao } from "@/components/tce/tipo-licitacao-combobox";
 import { Licitacao_TextArea } from "@/components/forms/form__licitacao";
+import { Textarea } from "@/components/ui/textarea";
 
-export function TCEeContas_Licitacao() {
+export function TCE_CardLicitacao() {
   const [modalidadeLicitacao, setModalidadeLicitacao] = useState("");
   const [tipoLicitacao, setTipoLicitacao] = useState("");
   const [naturezaObjeto, setNaturezaObjeto] = useState("");
@@ -70,12 +72,11 @@ export function TCEeContas_Licitacao() {
   return (
     <div className="flex w-full max-w-full flex-col gap-6">
           <Card>
+
             <CardHeader>
               <CardTitle>LICITACAO.JSON</CardTitle>
-              {/* <CardDescription>
-                Make changes to your account here. Click save when youre done.
-              </CardDescription> */}
             </CardHeader>
+
             <CardContent className="grid gap-6">
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -159,8 +160,97 @@ export function TCEeContas_Licitacao() {
               </div>
 
             </CardContent>
+
             <CardFooter className="justify-center">
               <Button id="btn-gerar-licitacao-json" onClick={handleGerarJson}>Gerar Arquivo LICITACAO.JSON</Button>
+            </CardFooter>
+          </Card>
+    </div>
+  )
+}
+
+export function TCE_CardItemLicitacao() {
+return (
+    <div className="flex w-full max-w-full flex-col gap-6">
+          <Card>
+
+            <CardHeader>
+              <CardTitle>ITEMLICITACAO.JSON</CardTitle>
+              <CardDescription>
+                Situação de cada item licitado após conclusão do processo licitatório. Envio inicial, na publicação do edital, com status “07 – Aberto” e envio após término do processo com o respectivo status final.
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent className="grid gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="num-processo-licitatorio">Número do Processo Licitatório</Label>
+                  <Input id="num-processo-licitatorio" placeholder="2024006806/AADESAM" />
+                </div>
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="num-edital-licitacao">Número do Edital de Licitação*</Label>
+                  <Input id="num-edital-licitacao" placeholder="006/2025" required />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid gap-3">
+                  <Label htmlFor="dt-publicacao-edital">Data de Publicação do Edital de Licitação*</Label>
+                  <Input id="dt-publicacao-edital" placeholder="20250430" required />
+                </div>
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="num-sequencial-item">Número Sequencial do Item</Label>
+                  <Input id="num-sequencial-item" placeholder="1" type="number" inputMode="numeric" required />
+                </div>
+              </div>
+
+              <div className="grid gap-3">
+                  <Label htmlFor="des-item-licitacao">Descrição do Item</Label>
+                  <Textarea id="des-item-licitacao" maxLength={300} />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid gap-3">
+                  <Label htmlFor="qt-item-solicitado">Quantidade Solicitada*</Label>
+                  <Input id="qt-item-solicitado" placeholder="1.5" type="number" inputMode="decimal" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="dt-homologacao-item">Data de Homologação</Label>
+                  <p className="text-muted-foreground text-sm">
+                    Informar somente se Status do Item = “01”
+                  </p>
+                  <Input id="dt-homologacao-item" placeholder=" aaaammdd" type="number" maxLength={8} inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]" />
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="dt-publicacao-homologacao">Data de Publicação da Homologação</Label>
+                  <p className="text-muted-foreground text-sm">
+                    Informar somente se Status do Item = “01”
+                  </p>
+                  <Input id="dt-publicacao-homologacao" placeholder=" aaaammdd" maxLength={8} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]" />
+                </div>
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="unidade-medida">Unidade de Medida*</Label>
+                  <Input id="unidade-medida" placeholder="KG" maxLength={30}/>
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="item-status">Status*</Label>
+                  <p className="text-muted-foreground text-sm">
+                    01-Homologação | 02-Cancelado | 03-Anulado | 04-Revogado | 05-Deserto | 06-Fracassado
+                  </p>
+                  <Input id="item-status" placeholder="02" maxLength={2} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]" />
+                </div>
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="cod-item-lote">Controle Item Lote</Label>
+                  <p className="text-muted-foreground text-sm">
+                    Obrigatório se o tipo da licitação informado no arquivo LICITACAO.JSON for igual a L.
+                  </p>
+                  <Input id="cod-item-lote" placeholder="LOTE01" maxLength={10}/>
+                </div>
+              </div>
+
+            </CardContent>
+            <CardFooter className="justify-center">
+              <Button id="btn-gerar-licitacao-json">Gerar Arquivo ITEMLICITACAO.JSON</Button>
             </CardFooter>
           </Card>
     </div>
