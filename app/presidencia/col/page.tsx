@@ -256,3 +256,89 @@ return (
     </div>
   )
 }
+
+export function TCE_CardLicitacaoHistorico() {
+return (
+    <div className="flex w-full max-w-full flex-col gap-6">
+          <Card>
+
+            <CardHeader>
+              <CardTitle>LICITACAOHISTORICO.JSON</CardTitle>
+              <CardDescription>
+                Informações de publicações no Diário Oficial e data prevista para licitação. 
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent className="grid gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="cod-unidade-orcamentaria">Código da Unidade Orçamentária*</Label>
+                  <Input id="cod-unidade-orcamentaria" placeholder="99001" defaultValue={99001} required maxLength={6} type="number" inputMode="numeric" className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
+                </div>
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="num-processo-licitatorio">Número do Processo Licitatório</Label>
+                  <Input id="num-processo-licitatorio" placeholder="2024006806/AADESAM" maxLength={21} />
+                </div>
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="num-edital-licitacao">Número do Edital de Licitação*</Label>
+                  <Input id="num-edital-licitacao" placeholder="006/2025" maxLength={16} required />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid gap-3">
+                  <Label htmlFor="dt-publicacao-edital">Data de Publicação do Edital de Licitação*</Label>
+                  <Input id="dt-publicacao-edital" placeholder="20250430" maxLength={8} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
+                </div>
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="num-diario-oficial">Número do Diário Oficial do Estado*</Label>
+                  <Input id="num-diario-oficial" placeholder="35454" maxLength={6} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="dt-limite-propostas">Data Limite Para Envio das Propostas</Label>
+                  <Input id="dt-limite-propostas" placeholder="20250430" maxLength={8} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
+                </div>
+              </div>
+
+            </CardContent>
+            <CardFooter className="justify-center">
+              <Button id="btn-gerar-licitacao-json">Gerar Arquivo LICITACAOHISTORICO.JSON</Button>
+            </CardFooter>
+          </Card>
+    </div>
+  )
+}
+
+export function TCE_CardPublicacao() {
+return (
+    <div className="flex w-full max-w-full flex-col gap-6">
+          <Card>
+
+            <CardHeader>
+              <CardTitle>PUBLICACAO.JSON</CardTitle>
+            </CardHeader>
+
+            <CardContent className="grid gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="num-processo-licitatorio">Número do Processo Licitatório*</Label>
+                  <Input id="num-processo-licitatorio" placeholder="2024006806/AADESAM" maxLength={21} />
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="dt-publicacao-edital">Data de Publicação do Edital nos Meios de Comunicação*</Label>
+                  <Input id="dt-publicacao-edital" placeholder="20250430" maxLength={8} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
+                </div>
+                <div className="grid gap-3 w-full">
+                  <Label htmlFor="nome-veiculo-comunicacao">Nome do Veículo de Comunicação*</Label>
+                  <Input id="nome-veiculo-comunicacao" placeholder="Diário Oficial do Estado do Amazonas" maxLength={50} />
+                </div>
+              </div>
+
+            </CardContent>
+            <CardFooter className="justify-center">
+              <Button id="btn-gerar-publicao-json">Gerar Arquivo PUBLICACAO.JSON</Button>
+            </CardFooter>
+          </Card>
+    </div>
+  )
+}

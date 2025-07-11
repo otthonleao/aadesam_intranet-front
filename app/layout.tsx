@@ -6,7 +6,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { Separator } from "@radix-ui/react-separator";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { TCE_CardItemLicitacao, TCE_CardLicitacao } from "./presidencia/col/page";
+import { TCE_CardItemLicitacao, TCE_CardLicitacao, TCE_CardLicitacaoHistorico, TCE_CardPublicacao } from "./presidencia/col/page";
 // import { ThemeProvider } from "@/components/theme-provider";
 // import { ModeToggle } from "@/components/mode-toogle";
 
@@ -71,6 +71,12 @@ export default function RootLayout({
               </div>
               <div>
                 <TCE_CardItemLicitacao></TCE_CardItemLicitacao>
+              </div>
+              <div>
+                <TCE_CardLicitacaoHistorico></TCE_CardLicitacaoHistorico>
+              </div>
+              <div>
+                <TCE_CardPublicacao></TCE_CardPublicacao>
               </div>
             </div>
           </SidebarInset>
