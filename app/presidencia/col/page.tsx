@@ -170,7 +170,51 @@ export function TCE_CardLicitacao() {
 }
 
 export function TCE_CardItemLicitacao() {
-return (
+  const handleGerarItemLicitacaoJson = () => {
+    const numProcessoLicitatorio = (document.getElementById('num-processo-licitatorio-2') as HTMLInputElement)?.value;
+    const numEditalLicitacao = (document.getElementById('num-edital-licitacao') as HTMLInputElement)?.value;
+    const dtPublicacaoEdital = (document.getElementById('dt-publicacao-edital') as HTMLInputElement)?.value;
+    const numSequencialItem = (document.getElementById('num-sequencial-item') as HTMLInputElement)?.value;
+    const desItemLicitacao = (document.getElementById('des-item-licitacao') as HTMLTextAreaElement)?.value;
+    const qtItemSolicitado = (document.getElementById('qt-item-solicitado') as HTMLInputElement)?.value;
+    const dtHomologacaoItem = (document.getElementById('dt-homologacao-item') as HTMLInputElement)?.value;
+    const dtPublicacaoHomologacao = (document.getElementById('dt-publicacao-homologacao') as HTMLInputElement)?.value;
+    const unidadeMedida = (document.getElementById('unidade-medida') as HTMLInputElement)?.value;
+    const status = (document.getElementById('item-status') as HTMLInputElement)?.value;
+    const codItemLote = (document.getElementById('cod-item-lote') as HTMLInputElement)?.value;
+
+    const jsonData = [
+      {
+        numProcessoLicitatorio,
+        numEditalLicitacao,
+        dtPublicacaoEdital,
+        numSequencialItem: parseInt(numSequencialItem),
+        desItemLicitacao,
+        qtItemLicitado: parseFloat(qtItemSolicitado),
+        dtHomologacaoItem,
+        dtPublicacaoHomologacao,
+        unidadeMedida,
+        status: parseInt(status),
+        codItemLote
+      }
+    ];
+
+    const jsonString = JSON.stringify(jsonData, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, 12);
+    a.download = `ITEMLICITACAO_${timestamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  return (
     <div className="flex w-full max-w-full flex-col gap-6">
           <Card>
 
@@ -184,8 +228,8 @@ return (
             <CardContent className="grid gap-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="grid gap-3 w-full">
-                  <Label htmlFor="num-processo-licitatorio">Número do Processo Licitatório</Label>
-                  <Input id="num-processo-licitatorio" placeholder="2024006806/AADESAM" />
+                  <Label htmlFor="num-processo-licitatorio-2">Número do Processo Licitatório</Label>
+                  <Input id="num-processo-licitatorio-2" placeholder="2024006806/AADESAM" />
                 </div>
                 <div className="grid gap-3 w-full">
                   <Label htmlFor="num-edital-licitacao">Número do Edital de Licitação*</Label>
@@ -250,7 +294,7 @@ return (
 
             </CardContent>
             <CardFooter className="justify-center">
-              <Button id="btn-gerar-licitacao-json">Gerar Arquivo ITEMLICITACAO.JSON</Button>
+              <Button id="btn-gerar-licitacao-json" onClick={handleGerarItemLicitacaoJson}>Gerar Arquivo ITEMLICITACAO.JSON</Button>
             </CardFooter>
           </Card>
     </div>
@@ -258,7 +302,41 @@ return (
 }
 
 export function TCE_CardLicitacaoHistorico() {
-return (
+  const handleGerarLicitacaoHistoricoJson = () => {
+    const codUnidadeOrcamentaria = (document.getElementById('cod-unidade-orcamentaria-3') as HTMLInputElement)?.value;
+    const numProcessoLicitatorio = (document.getElementById('num-processo-licitatorio-3') as HTMLInputElement)?.value;
+    const numEditalLicitacao = (document.getElementById('num-edital-licitacao-3') as HTMLInputElement)?.value;
+    const dtPublicacaoEdital = (document.getElementById('dt-publicacao-edital-3') as HTMLInputElement)?.value;
+    const numDiarioOficial = (document.getElementById('num-diario-oficial') as HTMLInputElement)?.value;
+    const dtLimitePropostas = (document.getElementById('dt-limite-propostas') as HTMLInputElement)?.value;
+
+    const jsonData = [
+      {
+        codUnidadeOrcamentaria: parseInt(codUnidadeOrcamentaria),
+        numProcessoLicitatorio,
+        numEditalLicitacao,
+        dtPublicacaoEdital,
+        numDiarioOficial: parseInt(numDiarioOficial),
+        dtLimitePropostas
+      }
+    ];
+
+    const jsonString = JSON.stringify(jsonData, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, 12);
+    a.download = `LICITACAOHISTORICO_${timestamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  return (
     <div className="flex w-full max-w-full flex-col gap-6">
           <Card>
 
@@ -272,23 +350,23 @@ return (
             <CardContent className="grid gap-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="grid gap-3 w-full">
-                  <Label htmlFor="cod-unidade-orcamentaria">Código da Unidade Orçamentária*</Label>
-                  <Input id="cod-unidade-orcamentaria" placeholder="99001" defaultValue={99001} required maxLength={6} type="number" inputMode="numeric" className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
+                  <Label htmlFor="cod-unidade-orcamentaria-3">Código da Unidade Orçamentária*</Label>
+                  <Input id="cod-unidade-orcamentaria-3" placeholder="99001" defaultValue={"99001"} required maxLength={6} type="number" inputMode="numeric" className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
                 </div>
                 <div className="grid gap-3 w-full">
-                  <Label htmlFor="num-processo-licitatorio">Número do Processo Licitatório</Label>
-                  <Input id="num-processo-licitatorio" placeholder="2024006806/AADESAM" maxLength={21} />
+                  <Label htmlFor="num-processo-licitatorio-3">Número do Processo Licitatório</Label>
+                  <Input id="num-processo-licitatorio--3" placeholder="2024006806/AADESAM" maxLength={21} />
                 </div>
                 <div className="grid gap-3 w-full">
-                  <Label htmlFor="num-edital-licitacao">Número do Edital de Licitação*</Label>
-                  <Input id="num-edital-licitacao" placeholder="006/2025" maxLength={16} required />
+                  <Label htmlFor="num-edital-licitacao-3">Número do Edital de Licitação*</Label>
+                  <Input id="num-edital-licitacao-3" placeholder="006/2025" maxLength={16} required />
                 </div>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="grid gap-3">
-                  <Label htmlFor="dt-publicacao-edital">Data de Publicação do Edital de Licitação*</Label>
-                  <Input id="dt-publicacao-edital" placeholder="20250430" maxLength={8} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
+                  <Label htmlFor="dt-publicacao-edital-3">Data de Publicação do Edital de Licitação*</Label>
+                  <Input id="dt-publicacao-edital-3" placeholder="20250430" maxLength={8} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
                 </div>
                 <div className="grid gap-3 w-full">
                   <Label htmlFor="num-diario-oficial">Número do Diário Oficial do Estado*</Label>
@@ -302,7 +380,7 @@ return (
 
             </CardContent>
             <CardFooter className="justify-center">
-              <Button id="btn-gerar-licitacao-json">Gerar Arquivo LICITACAOHISTORICO.JSON</Button>
+              <Button id="btn-gerar-licitacao-historico-json" onClick={handleGerarLicitacaoHistoricoJson}>Gerar Arquivo LICITACAOHISTORICO.JSON</Button>
             </CardFooter>
           </Card>
     </div>
@@ -310,7 +388,35 @@ return (
 }
 
 export function TCE_CardPublicacao() {
-return (
+  const handleGerarPublicacaoJson = () => {
+    const numProcessoLicitatorio = (document.getElementById('num-processo-licitatorio-4') as HTMLInputElement)?.value;
+    const dtPublicacaoEdital = (document.getElementById('dt-publicacao-edital-4') as HTMLInputElement)?.value;
+    const nomeVeiculoComunicacao = (document.getElementById('nome-veiculo-comunicacao') as HTMLInputElement)?.value;
+
+    const jsonData = [
+      {
+        numProcessoLicitatorio,
+        dtPublicacaoEdital,
+        nomeVeiculoComunicacao
+      }
+    ];
+
+    const jsonString = JSON.stringify(jsonData, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, 12);
+    a.download = `PUBLICACAO_${timestamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  return (
     <div className="flex w-full max-w-full flex-col gap-6">
           <Card>
 
@@ -321,12 +427,12 @@ return (
             <CardContent className="grid gap-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="grid gap-3 w-full">
-                  <Label htmlFor="num-processo-licitatorio">Número do Processo Licitatório*</Label>
-                  <Input id="num-processo-licitatorio" placeholder="2024006806/AADESAM" maxLength={21} />
+                  <Label htmlFor="num-processo-licitatorio-4">Número do Processo Licitatório*</Label>
+                  <Input id="num-processo-licitatorio-4" placeholder="2024006806/AADESAM" maxLength={21} />
                 </div>
                 <div className="grid gap-3">
-                  <Label htmlFor="dt-publicacao-edital">Data de Publicação do Edital nos Meios de Comunicação*</Label>
-                  <Input id="dt-publicacao-edital" placeholder="20250430" maxLength={8} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
+                  <Label htmlFor="dt-publicacao-edital-4">Data de Publicação do Edital nos Meios de Comunicação*</Label>
+                  <Input id="dt-publicacao-edital-4" placeholder="20250430" maxLength={8} type="number" inputMode="numeric" required className="appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [MozAppearance:textfield]"/>
                 </div>
                 <div className="grid gap-3 w-full">
                   <Label htmlFor="nome-veiculo-comunicacao">Nome do Veículo de Comunicação*</Label>
@@ -336,7 +442,7 @@ return (
 
             </CardContent>
             <CardFooter className="justify-center">
-              <Button id="btn-gerar-publicao-json">Gerar Arquivo PUBLICACAO.JSON</Button>
+              <Button id="btn-gerar-publicao-json" onClick={handleGerarPublicacaoJson}>Gerar Arquivo PUBLICACAO.JSON</Button>
             </CardFooter>
           </Card>
     </div>
