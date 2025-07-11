@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run lint:fix && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "eslint '**/*.{js,ts,jsx,tsx}' --fix"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
