@@ -120,7 +120,7 @@ export function InputCurrencyBRL({
     if (typeof value === 'string' && value !== internalValue) {
       setInternalValue(formatCurrencyBRL(value))
     }
-  }, [value])
+  }, [value, internalValue])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value
@@ -199,7 +199,7 @@ export function InputNumberPNPC({
     if (typeof value === 'string' && value !== internalValue) {
       setInternalValue(maskPNPC(value))
     }
-  }, [value])
+  }, [value, internalValue])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const onlyNumbers = e.target.value.replace(/\D/g, '')
